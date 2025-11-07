@@ -1,13 +1,18 @@
 package co.edu.ufps.segundoparcialweb1152383.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "solicitud")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Solicitud {
 
     @Id
