@@ -1,5 +1,6 @@
 package co.edu.ufps.segundoparcialweb1152383.controllers;
 
+import co.edu.ufps.segundoparcialweb1152383.models.Solicitud;
 import co.edu.ufps.segundoparcialweb1152383.models.SolicitudDTO;
 import co.edu.ufps.segundoparcialweb1152383.services.SolicitudServices;
 import co.edu.ufps.segundoparcialweb1152383.utils.ApiResponse;
@@ -21,5 +22,17 @@ public class SolicitudController {
     public ApiResponse<List<SolicitudDTO>> listarSolicitudes() {
         List<SolicitudDTO> lista = solicitudServices.listar();
         return new ApiResponse<>("success", "Listado de solicitudes", lista);
+    }
+
+    @PostMapping("/{idSolicitante}/{idCodeudor}")
+    public ApiResponse<Solicitud> registrarSolicitud(
+            @PathVariable Integer idSolicitante,
+            @PathVariable Integer idCodeudor) {
+        try {
+            Solicitud solicitud = solicitudServices.registrarSolicitud(idSolicitante, idCodeudor);
+            return new ApiResponse<>("created", "Solicitud registrada exitosamente", solicitud);
+        } catch (RuntimeException e) {
+            return new ApiResponse<>("error", e.getMessage(), null);
+        }
     }
 }
